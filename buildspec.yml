@@ -1,0 +1,36 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo Installing dependencies...
+      - npm install
+
+  pre_build:
+    commands:
+      - echo Running tests...
+      - npm test # Ensure you have a test script in package.json
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Compiling TypeScript...
+      - npm run build
+      - echo Build completed.
+
+  post_build:
+    commands:
+      - echo Preparing artifacts...
+      - cp package.json dist/
+      - cp package-lock.json dist/
+      - cp -r node_modules dist/
+      # Copy appspec.yml for CodeDeploy (We create this next)
+      - cp appspec.yml dist/
+      - cp -r scripts dist/
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: dist
