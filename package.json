@@ -19,6 +19,7 @@
     "@types/ioredis": "^4.28.10",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.10.1",
+    "@types/sequelize": "^4.28.20",
     "dotenv": "^17.2.3",
     "eslint": "^9.39.1",
     "express": "^5.1.0",
