@@ -7,14 +7,16 @@ import userRoutes from './routes/user.routes';
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/items', itemRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
-// Health Check Route
+
+// Health check
 app.get('/', (req, res) => {
-  res.send('🚀 API is running!');
+  res.json({ message: 'Unite Backend API', status: 'running' });
 });
 
 // Global error handler (should be after routes)

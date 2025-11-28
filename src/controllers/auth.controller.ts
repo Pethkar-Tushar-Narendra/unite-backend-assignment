@@ -55,10 +55,10 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const refreshToken = (req: Request, res: Response) => {
-  const { token } = req.body;
-  if (!token) return res.sendStatus(401);
+  const { refreshToken } = req.body;
+  if (!refreshToken) return res.sendStatus(401);
   jwt.verify(
-    token,
+    refreshToken,
     process.env.JWT_REFRESH_SECRET || 'refresh_secret',
     async (err: any, user: any) => {
       if (err) return res.sendStatus(403);
