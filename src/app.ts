@@ -1,11 +1,15 @@
 import express from 'express';
+import cors from 'cors';
 import { errorHandler } from './middlewares/errorHandler';
 import authRoutes from './routes/auth.routes';
 import itemRoutes from './routes/itemRoutes';
 import userRoutes from './routes/user.routes';
+import leadRoutes from './routes/lead.routes';
 
 const app = express();
 
+// Middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -13,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/items', itemRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/leads', leadRoutes);
 
 // Health check
 app.get('/', (req, res) => {

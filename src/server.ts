@@ -4,6 +4,9 @@ import './config/redis';
 import sequelize from './config/database'; // Import sequelize instance for syncing
 import config from './config/config';
 
+import User from './models/user.model';
+import Lead from './models/lead.model';
+
 const startServer = async () => {
   try {
     // 1. Connect to MySQL (Create DB if missing)
@@ -12,9 +15,17 @@ const startServer = async () => {
     // 2. Connect to MongoDB
     await connectMongoDB();
 
+    // 3. Sync models ONE BY ONE in order
+    console.log('⏳ Syncing User model...');
+    await User.sync({ alter: true });
+    console.log('✅ User model synced');
+
+    console.log('⏳ Syncing Lead model...');
+    await Lead.sync({ alter: true });
+    console.log('✅ Lead model synced');
     // 3. Sync Sequelize Models (Create tables) - THIS WAS MISSING
     // { alter: true } updates tables if columns change without dropping data
-    await sequelize.sync({ alter: true });
+    // await sequelize.sync({ alter: true });
     console.log('✅ Database & tables synced');
 
     // 4. NOW import the app (which loads models)

@@ -37,7 +37,7 @@ class User
 User.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.BIGINT,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -62,7 +62,7 @@ User.init(
   },
   {
     sequelize,
-    tableName: 'users',
+    tableName: 'Users',
     hooks: {
       beforeCreate: async (user) => {
         if (user.password) {
