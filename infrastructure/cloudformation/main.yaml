@@ -52,7 +52,7 @@ Resources:
       AllocatedStorage: '20'
       MasterUsername: 'admin'
       MasterUserPassword: !Ref DBPassword
-      PubliclyAccessible: true # Set to true so it uses public subnets easily
+      PubliclyAccessible: false # Set to true so it uses public subnets easily
       VPCSecurityGroups:
         - !GetAtt WebServerSecurityGroup.GroupId # FORCE ID retrieval
 
