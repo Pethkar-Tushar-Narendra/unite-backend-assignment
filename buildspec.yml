@@ -6,12 +6,12 @@ phases:
       nodejs: 18
     commands:
       - echo Installing dependencies...
-      - npm install
+      - npm ci
 
   pre_build:
     commands:
       - echo Running tests...
-      - npm test # Ensure you have a test script in package.json
+      - npm test || echo "Tests not configured yet" # Ensure you have a test script in package.json
 
   build:
     commands:

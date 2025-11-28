@@ -2,6 +2,7 @@ import { connectMySQL } from './config/database';
 import connectMongoDB from './config/mongodb';
 import './config/redis';
 import sequelize from './config/database'; // Import sequelize instance for syncing
+import config from './config/config';
 
 const startServer = async () => {
   try {
@@ -19,7 +20,7 @@ const startServer = async () => {
     // 4. NOW import the app (which loads models)
     const app = (await import('./app')).default;
 
-    const PORT = process.env.PORT || 3000;
+    const PORT = config.port || 3000;
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
     });

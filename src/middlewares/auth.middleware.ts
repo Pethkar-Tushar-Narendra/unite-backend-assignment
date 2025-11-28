@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
+dotenv.config();
 // Extend Express Request interface to include user
 export interface AuthRequest extends Request {
   user?: { id: number; role: string };

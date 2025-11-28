@@ -1,5 +1,14 @@
-node_modules
+# Environment variables
 .env
-dist 
+.env.local
+.env.production
+.env.*.local
+
+# Dependencies
+node_modules/
+dist/
+
+# Logs
+logs/
 *.log
 unite-key.pem
