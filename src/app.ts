@@ -1,9 +1,7 @@
 import express from 'express';
-import itemRoutes from './routes/itemRoutes';
 import { errorHandler } from './middlewares/errorHandler';
-import User from './models/user.model';
 import authRoutes from './routes/auth.routes';
-import sequelize from './config/database';
+import itemRoutes from './routes/itemRoutes';
 import userRoutes from './routes/user.routes';
 
 const app = express();
