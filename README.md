@@ -25,39 +25,24 @@ A production-ready Node.js backend system with TypeScript, Express, AWS services
 
 ### System Components
 
-┌─────────────┐
-│ Client │
-└──────┬──────┘
-│
-▼
-┌─────────────────────────────────┐
-│ Express API Server │
-│ (Authentication, RBAC, CRUD) │
-└─────┬───────────────────────┬───┘
-│ │
-▼ ▼
-┌─────────────┐ ┌──────────────┐
-│ MySQL │ │ MongoDB │
-│ (RDS) │ │ (Logs) │
-└─────────────┘ └──────────────┘
-│ │
-├───────────┬───────────┤
-│ │ │
-▼ ▼ ▼
-┌─────────┐ ┌─────────┐ ┌─────────┐
-│ S3 │ │ Redis │ │ SQS │
-└─────────┘ └─────────┘ └────┬────┘
-│
-▼
-┌──────────┐
-│ Worker │
-│(CSV Proc)│
-└──────────┘
-│ │
-▼ ▼
-┌─────────┐ ┌──────────┐
-│ SNS │───────────│ Twilio │
-└─────────┘ └──────────┘
+Client
+  │
+  ▼
+Express API Server (Authentication, RBAC, CRUD)
+  │
+  ├── MySQL (RDS)
+  │
+  ├── MongoDB (Logs)
+  │
+  ├── S3 (CSV uploads, images)
+  │
+  ├── Redis (Caching)
+  │
+  ├── SQS (Async queue)
+  │     └── Worker (CSV Processor)
+  │
+  └── SNS ──> Twilio (SMS)
+
 
 
 ## 🚀 Features Implemented
@@ -370,45 +355,46 @@ Results are saved in `load-tests/results.txt`
 
 ## 📝 Project Structure
 unite-backend-assignment/
-├── .github/
-│ └── workflows/
-│ └── deploy.yml # GitHub Actions CI/CD
+├── .github/                       # GitHub configuration
+│   └── workflows/
+│       └── deploy.yml             # GitHub Actions CI/CD
 ├── docs/
-│ └── architecture.png # System architecture diagram
+│   └── architecture.png           # System architecture diagram
 ├── infrastructure/
-│ └── terraform/ # IaC templates
+│   └── terraform/                 # IaC templates
 ├── load-tests/
-│ ├── leads.js # k6 load test script
-│ └── results.txt # Load test results
+│   ├── leads.js                   # k6 load test script
+│   └── results.txt                # Load test results
 ├── logs/
-│ └── deployment.log # Deployment logs
+│   └── deployment.log             # Deployment logs
 ├── src/
-│ ├── config/ # Database and service configs
-│ ├── controllers/ # Request handlers
-│ ├── middlewares/ # Auth, RBAC, error handling
-│ ├── models/ # Database models
-│ ├── routes/ # API routes
-│ ├── services/ # Business logic (S3, SNS, SQS, Twilio)
-│ ├── workers/ # Background workers (CSV processor)
-│ ├── app.ts # Express app configuration
-│ ├── server.ts # Server entry point
-│ └── worker.ts # Worker entry point
+│   ├── config/                    # Database and service configs
+│   ├── controllers/               # Request handlers
+│   ├── middlewares/               # Auth, RBAC, error handling
+│   ├── models/                    # Database models
+│   ├── routes/                    # API routes
+│   ├── services/                  # Business logic (S3, SNS, SQS, Twilio)
+│   ├── workers/                   # Background workers (CSV processor)
+│   ├── app.ts                     # Express app configuration
+│   ├── server.ts                  # Server entry point
+│   └── worker.ts                  # Worker entry point
 ├── tests/
-│ ├── auth.test.ts # Authentication tests
-│ ├── lead.test.ts # Lead management tests
-│ └── callTask.test.ts # Call task tests
+│   ├── auth.test.ts               # Authentication tests
+│   ├── lead.test.ts               # Lead management tests
+│   └── callTask.test.ts           # Call task tests
 ├── .dockerignore
 ├── .env.example
 ├── .gitignore
-├── buildspec.yml # AWS CodeBuild config
-├── docker-compose.yml # Local development
+├── buildspec.yml                  # AWS CodeBuild config
+├── docker-compose.yml             # Local development
 ├── Dockerfile
 ├── jest.config.js
 ├── package.json
-├── postman_collection.json # API collection
+├── postman_collection.json        # API collection
 ├── README.md
-├── sample_leads.csv # Sample CSV (100 rows)
+├── sample_leads.csv               # Sample CSV (100 rows)
 └── tsconfig.json
+
 ## 🤝 Contributing
 
 1. Fork the repository
