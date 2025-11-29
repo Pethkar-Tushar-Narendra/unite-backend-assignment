@@ -349,3 +349,86 @@ docker build -t unite-backend:latest .
 docker run -p 3003:3003 --env-file .env unite-backend:latest
 ### Docker Compose Production
 docker-compose -f docker-compose.prod.yml up -d
+
+## 📊 Load Testing
+
+### Using k6
+k6 run load-tests/leads.js
+
+Results are saved in `load-tests/results.txt`
+
+## 🔐 Security Best Practices
+
+- ✅ JWT tokens with expiration
+- ✅ Bcrypt password hashing
+- ✅ Environment variables for secrets
+- ✅ CORS configuration
+- ✅ Input validation and sanitization
+- ✅ SQL injection prevention (Sequelize ORM)
+- ✅ Rate limiting (planned)
+- ✅ HTTPS in production
+
+## 📝 Project Structure
+unite-backend-assignment/
+├── .github/
+│ └── workflows/
+│ └── deploy.yml # GitHub Actions CI/CD
+├── docs/
+│ └── architecture.png # System architecture diagram
+├── infrastructure/
+│ └── terraform/ # IaC templates
+├── load-tests/
+│ ├── leads.js # k6 load test script
+│ └── results.txt # Load test results
+├── logs/
+│ └── deployment.log # Deployment logs
+├── src/
+│ ├── config/ # Database and service configs
+│ ├── controllers/ # Request handlers
+│ ├── middlewares/ # Auth, RBAC, error handling
+│ ├── models/ # Database models
+│ ├── routes/ # API routes
+│ ├── services/ # Business logic (S3, SNS, SQS, Twilio)
+│ ├── workers/ # Background workers (CSV processor)
+│ ├── app.ts # Express app configuration
+│ ├── server.ts # Server entry point
+│ └── worker.ts # Worker entry point
+├── tests/
+│ ├── auth.test.ts # Authentication tests
+│ ├── lead.test.ts # Lead management tests
+│ └── callTask.test.ts # Call task tests
+├── .dockerignore
+├── .env.example
+├── .gitignore
+├── buildspec.yml # AWS CodeBuild config
+├── docker-compose.yml # Local development
+├── Dockerfile
+├── jest.config.js
+├── package.json
+├── postman_collection.json # API collection
+├── README.md
+├── sample_leads.csv # Sample CSV (100 rows)
+└── tsconfig.json
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is part of Unite Backend Developer Assignment.
+
+## 👤 Author
+
+**Tushar Pethkar**
+- GitHub: [@your-username](https://github.com/your-username)
+- Email: your.email@example.com
+
+## 🙏 Acknowledgments
+
+- Unite Team for the assignment guidelines
+- AWS Documentation
+- Node.js and TypeScript communities
