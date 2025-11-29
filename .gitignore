@@ -13,3 +13,4 @@ logs/
 *.log
 unite-key.pem
 Tushar_accessKeys (1).csv
+twilio_2FA_recovery_code.txt
