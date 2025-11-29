@@ -3,6 +3,8 @@ import CallTask from '../models/callTask.model';
 import { sendSNSNotification } from '../services/sns.service';
 import { sendSMS } from '../services/twilio.service';
 import { AuthRequest } from '../middlewares/auth.middleware';
+import { CallLog } from '../models/callLog.model';
+import User from '../models/user.model';
 
 export const createCallTask = async (req: AuthRequest, res: Response) => {
   try {
@@ -51,18 +53,36 @@ export const createCallTask = async (req: AuthRequest, res: Response) => {
 export const completeCallTask = async (req: AuthRequest, res: Response) => {
   try {
     const { id } = req.params;
-    const { notes, outcome } = req.body;
+    const { notes, outcome, duration_minutes } = req.body;
 
     const task = await CallTask.findByPk(id);
     if (!task) {
       return res.status(404).json({ message: 'Task not found' });
     }
 
+    const completedAt = new Date();
+
     task.status = 'completed';
     task.notes = notes;
     task.outcome = outcome;
-    task.completed_at = new Date();
+    task.completed_at = completedAt;
     await task.save();
+
+    // Get agent details
+    const agent = await User.findByPk(task.assigned_to);
+
+    // Log to MongoDB for analytics
+    await CallLog.create({
+      task_id: task.id,
+      lead_id: task.lead_id,
+      agent_id: task.assigned_to,
+      agent_name: agent?.name || 'Unknown',
+      status: 'completed',
+      outcome,
+      scheduled_at: task.scheduled_at,
+      completed_at: new Date(),
+      call_date: new Date().toISOString().slice(0, 10), // 'YYYY-MM-DD'
+    });
 
     // Send completion notification
     await sendSNSNotification(
@@ -78,7 +98,6 @@ export const completeCallTask = async (req: AuthRequest, res: Response) => {
       .json({ message: 'Error completing task', error: error.message });
   }
 };
-
 export const getAllCallTasks = async (req: AuthRequest, res: Response) => {
   try {
     const { status, assigned_to } = req.query;
