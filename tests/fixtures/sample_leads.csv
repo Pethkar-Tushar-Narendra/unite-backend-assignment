@@ -1,0 +1,6 @@
+name,phone,email,status,source
+John Doe,+919876543210,john1@example.com,new,website
+Jane Smith,+919876543211,jane1@example.com,contacted,referral
+Bob Johnson,+919876543212,bob1@example.com,new,campaign
+Alice Brown,+919876543213,alice1@example.com,qualified,website
+Charlie Wilson,+919876543214,charlie1@example.com,new,cold_call
