@@ -6,6 +6,7 @@ import itemRoutes from './routes/itemRoutes';
 import userRoutes from './routes/user.routes';
 import leadRoutes from './routes/lead.routes';
 import callTaskRoutes from './routes/callTask.routes';
+import csvRoutes from './routes/csv.routes';
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/leads', leadRoutes);
 app.use('/api/call-tasks', callTaskRoutes);
+app.use('/api/csv', csvRoutes);
 
 // Health check
 app.get('/', (req, res) => {

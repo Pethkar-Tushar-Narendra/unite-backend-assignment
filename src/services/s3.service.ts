@@ -1,7 +1,11 @@
 // src/services/s3.service.ts
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import dotenv from 'dotenv';
+import {
+  S3Client,
+  PutObjectCommand,
+  GetObjectCommand,
+} from '@aws-sdk/client-s3';
 
 dotenv.config();
 
@@ -56,4 +60,41 @@ export const getUploadUrlForLeadImage = async (
   const fileUrl = `https://${bucketName}.s3.${region}.amazonaws.com/${key}`;
 
   return { uploadUrl, key, fileUrl };
+};
+
+export const uploadCSVToS3 = async (
+  fileBuffer: Buffer,
+  filename: string,
+): Promise<string> => {
+  const region = process.env.AWS_REGION || 'us-east-1';
+  const bucketName = process.env.S3_BUCKET as string;
+  const key = `csv-uploads/${Date.now()}-${filename}`;
+
+  const command = new PutObjectCommand({
+    Bucket: bucketName,
+    Key: key,
+    Body: fileBuffer,
+    ContentType: 'text/csv',
+  });
+
+  await s3Client.send(command);
+
+  const fileUrl = `https://${bucketName}.s3.${region}.amazonaws.com/${key}`;
+  console.log(`✅ CSV uploaded to S3: ${fileUrl}`);
+
+  return key;
+};
+
+export const downloadCSVFromS3 = async (key: string): Promise<string> => {
+  const bucketName = process.env.S3_BUCKET as string;
+
+  const command = new GetObjectCommand({
+    Bucket: bucketName,
+    Key: key,
+  });
+
+  const response = await s3Client.send(command);
+  const csvData = await response.Body?.transformToString();
+
+  return csvData || '';
 };
