@@ -11,6 +11,7 @@ import {
   validateUpdateLead,
 } from '../validators/lead.validator';
 import { authenticateJWT } from '../middlewares/auth.middleware';
+import { getLeadImageUploadUrl } from '../controllers/leadUpload.controller';
 
 const router = Router();
 
@@ -32,4 +33,6 @@ router.put('/:id', validateUpdateLead, updateLead);
 // DELETE /leads/:id - Delete lead
 router.delete('/:id', deleteLead);
 
+// get pre‑signed upload URL for lead image
+router.post('/upload-url', getLeadImageUploadUrl);
 export default router;

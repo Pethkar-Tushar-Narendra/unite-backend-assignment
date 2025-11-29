@@ -3,7 +3,7 @@ import connectMongoDB from './config/mongodb';
 import './config/redis';
 import sequelize from './config/database'; // Import sequelize instance for syncing
 import config from './config/config';
-
+import CallTask from './models/callTask.model';
 import User from './models/user.model';
 import Lead from './models/lead.model';
 
@@ -23,6 +23,11 @@ const startServer = async () => {
     console.log('⏳ Syncing Lead model...');
     await Lead.sync({ alter: true });
     console.log('✅ Lead model synced');
+
+    console.log('⏳ Syncing CallTask model...');
+    await CallTask.sync({ alter: true });
+    console.log('✅ CallTask model synced');
+
     // 3. Sync Sequelize Models (Create tables) - THIS WAS MISSING
     // { alter: true } updates tables if columns change without dropping data
     // await sequelize.sync({ alter: true });
