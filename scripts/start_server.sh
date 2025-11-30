@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-cd /home/ec2-user/my-app
+cd /home/ec2-user/unite-backend
 
 echo "Downloading environment variables from S3..."
 aws s3 cp s3://unite-backend-deployments-tushar/.env .env --region us-east-1
