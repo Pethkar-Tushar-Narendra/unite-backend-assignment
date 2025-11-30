@@ -115,5 +115,5 @@ jobs:
           aws deploy create-deployment \
             --application-name UniteApp \
             --deployment-group-name UniteDeployGroup \
-            --s3-location bucket=unite-backend-deployments,key=deployment-${{ github.sha }}.zip,bundleType=zip \
+            --s3-location bucket=unite-backend-deployments-tushar,key=deployment-${{ github.sha }}.zip,bundleType=zip \
             --description "Deployment from GitHub Actions - commit ${{ github.sha }}"
