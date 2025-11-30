@@ -347,8 +347,8 @@ This project is part of Unite Backend Developer Assignment.
 ## 👤 Author
 
 **Tushar Pethkar**
-- GitHub: [@your-username](https://github.com/your-username)
-- Email: your.email@example.com
+- GitHub: [@Pethkar-Tushar-Narendra](https://github.com/Pethkar-Tushar-Narendra)
+- Email: pethkartusharnarendra@gmail.com
 
 ## 🙏 Acknowledgments
 
