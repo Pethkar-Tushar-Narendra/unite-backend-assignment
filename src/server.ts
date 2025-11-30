@@ -1,5 +1,5 @@
 import { connectMySQL } from './config/database';
-import connectMongoDB from './config/mongodb';
+// import connectMongoDB from './config/mongodb';
 import './config/redis';
 import sequelize from './config/database'; // Import sequelize instance for syncing
 import config from './config/config';
@@ -13,7 +13,7 @@ const startServer = async () => {
     await connectMySQL();
 
     // 2. Connect to MongoDB
-    await connectMongoDB();
+    // await connectMongoDB();
 
     // 3. Sync models ONE BY ONE in order
     console.log('⏳ Syncing User model...');
