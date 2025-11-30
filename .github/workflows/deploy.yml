@@ -108,7 +108,7 @@ jobs:
 
       - name: Upload to S3
         run: |
-          aws s3 cp deployment.zip s3://unite-backend-deployments/deployment-${{ github.sha }}.zip
+          aws s3 cp deployment.zip s3://unite-backend-deployments-tushar/deployment-${{ github.sha }}.zip
 
       - name: Create CodeDeploy deployment
         run: |
