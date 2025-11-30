@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.test' });
 
-// Mock external services
+// Mock external servicess
 jest.mock('../src/services/sns.service', () => ({
   sendSNSNotification: jest.fn().mockResolvedValue(true),
 }));
