@@ -101,10 +101,14 @@ jobs:
 
       - name: Create deployment package
         run: |
-          cp package*.json dist/
-          cp appspec.yml dist/
-          cp -r scripts dist/
-          cd dist && zip -r ../deployment.zip . && cd ..
+          # GitHub Actions already built to dist/ in the build job
+          # Now package only what's needed for production
+          mkdir -p deployment-pkg
+          cp -r dist deployment-pkg/
+          cp package.json package-lock.json deployment-pkg/
+          cp appspec.yml deployment-pkg/
+          cp -r scripts deployment-pkg/
+          cd deployment-pkg && zip -r ../deployment.zip . && cd ..
 
       - name: Upload to S3
         run: |
