@@ -6,6 +6,7 @@ import config from './config/config';
 import CallTask from './models/callTask.model';
 import User from './models/user.model';
 import Lead from './models/lead.model';
+import 'dotenv/config';
 
 const startServer = async () => {
   try {
