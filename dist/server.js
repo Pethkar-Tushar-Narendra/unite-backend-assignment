@@ -39,7 +39,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = require("./config/database");
 const mongodb_1 = __importDefault(require("./config/mongodb"));
 require("./config/redis");
-const database_2 = __importDefault(require("./config/database")); // Import sequelize instance for syncing
 const config_1 = __importDefault(require("./config/config"));
 const callTask_model_1 = __importDefault(require("./models/callTask.model"));
 const user_model_1 = __importDefault(require("./models/user.model"));
@@ -63,7 +62,7 @@ const startServer = async () => {
         console.log('✅ CallTask model synced');
         // 3. Sync Sequelize Models (Create tables) - THIS WAS MISSING
         // { alter: true } updates tables if columns change without dropping data
-        await database_2.default.sync({ alter: true });
+        // await sequelize.sync({ alter: true });
         console.log('✅ Database & tables synced');
         // 4. NOW import the app (which loads models)
         const app = (await Promise.resolve().then(() => __importStar(require('./app')))).default;
