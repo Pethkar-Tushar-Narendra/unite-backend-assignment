@@ -31,7 +31,10 @@ const startServer = async () => {
 
     // 3. Sync Sequelize Models (Create tables) - THIS WAS MISSING
     // { alter: true } updates tables if columns change without dropping data
-    // await sequelize.sync({ alter: true });
+    await sequelize
+      .sync
+      // { alter: true }
+      ();
     console.log('✅ Database & tables synced');
 
     // 4. NOW import the app (which loads models)
