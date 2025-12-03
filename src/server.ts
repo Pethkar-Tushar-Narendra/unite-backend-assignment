@@ -18,7 +18,10 @@ const startServer = async () => {
 
     // 3. Sync models ONE BY ONE in order
     console.log('⏳ Syncing User model...');
-    await User.sync({ alter: true });
+    await User
+      .sync
+      // { alter: true }
+      ();
     console.log('✅ User model synced');
 
     console.log('⏳ Syncing Lead model...');
