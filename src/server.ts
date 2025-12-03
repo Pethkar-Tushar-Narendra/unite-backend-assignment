@@ -25,11 +25,17 @@ const startServer = async () => {
     console.log('✅ User model synced');
 
     console.log('⏳ Syncing Lead model...');
-    await Lead.sync({ alter: true });
+    await Lead
+      .sync
+      // { alter: true }
+      ();
     console.log('✅ Lead model synced');
 
     console.log('⏳ Syncing CallTask model...');
-    await CallTask.sync({ alter: true });
+    await CallTask
+      .sync
+      // { alter: true }
+      ();
     console.log('✅ CallTask model synced');
 
     // 3. Sync Sequelize Models (Create tables) - THIS WAS MISSING
