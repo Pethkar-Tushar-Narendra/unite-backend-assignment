@@ -32,7 +32,7 @@ const createCallTask = async (req, res) => {
         // Send SNS notification
         await (0, sns_service_1.sendSNSNotification)(`New call task assigned to agent ${assigned_to} for lead ${lead_id}`, 'New Call Task Assignment');
         // Send Twilio SMS (in production, fetch agent phone from DB)
-        await (0, twilio_service_1.sendSMS)('+919876543210', // Replace with actual agent phone
+        await (0, twilio_service_1.sendSMS)('+917796537874', // Replace with actual agent phone
         `You have a new call task scheduled for ${scheduled_at}`);
         res.status(201).json({ message: 'Call task created', task });
     }
