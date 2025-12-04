@@ -5,9 +5,10 @@ A production-ready Node.js backend system with TypeScript, Express, AWS services
 ## 🏗️ Architecture Overview
 
 ### Tech Stack
+
 - **Runtime**: Node.js 18+ with TypeScript
 - **Framework**: Express.js
-- **Databases**: 
+- **Databases**:
   - MySQL (RDS) - Primary data storage
   - MongoDB - Logs and analytics
   - Redis - Caching and session management
@@ -23,10 +24,10 @@ A production-ready Node.js backend system with TypeScript, Express, AWS services
   - GitHub Actions
   - AWS CodePipeline + CodeBuild
 
-
 ## 🚀 Features Implemented
 
 ### ✅ Core Features
+
 - [x] JWT Authentication with refresh tokens
 - [x] Role-Based Access Control (admin, manager, agent)
 - [x] Lead Management (CRUD with validation)
@@ -40,6 +41,7 @@ A production-ready Node.js backend system with TypeScript, Express, AWS services
 - [x] MongoDB aggregation for insights
 
 ### ✅ Infrastructure
+
 - [x] Docker containerization
 - [x] Docker Compose for local development
 - [x] AWS RDS MySQL setup
@@ -49,6 +51,7 @@ A production-ready Node.js backend system with TypeScript, Express, AWS services
 - [x] SQS queue for async tasks
 
 ### ✅ DevOps & Testing
+
 - [x] GitHub Actions CI/CD pipeline
 - [x] AWS CodePipeline + CodeBuild
 - [x] Unit tests (≥75% coverage)
@@ -104,35 +107,28 @@ TWILIO_ACCOUNT_SID=your_twilio_sid
 TWILIO_AUTH_TOKEN=your_twilio_token
 TWILIO_PHONE_NUMBER=+1234567890
 
-
 ## 📦 Installation
 
 ### Local Development with Docker
 
 1. **Clone the repository**
-git clone https://github.com/Pethkar-Tushar-Narendra/unite-backend-assignment
-cd unite-backend-assignment
-
+   git clone https://github.com/Pethkar-Tushar-Narendra/unite-backend-assignment
+   cd unite-backend-assignment
 
 2. **Install dependencies**
-npm install
-
+   npm install
 
 3. **Start services with Docker Compose**
-docker-compose up -d
-
+   docker-compose up -d
 
 4. **Run database migrations** (if needed)
-npm run migrate
-
+   npm run migrate
 
 5. **Start the development server**
-npm run dev
-
+   npm run dev
 
 6. **Start the CSV worker (in another terminal)**
-npm run worker
-
+   npm run worker
 
 The API will be available at `http://localhost:3003`
 
@@ -146,23 +142,33 @@ The API will be available at `http://localhost:3003`
 ## 🧪 Testing
 
 ### Run All Tests
+
 npm test
 
 ### Run with Coverage Report
+
 npm run test:coverage
 Coverage report will be generated in `coverage/index.html`
 
 ### Watch Mode (Development)
+
 npm run test:watch
 
 ## 📡 API Documentation
 
+### Deployed URL (EC2)
+
+- Base URL (HTTP): [http://ec2-34-203-10-112.compute-1.amazonaws.com:3003](http://ec2-34-203-10-112.compute-1.amazonaws.com:3003)
+- API Base Path: `/api`
+
 ### Base URL
+
 http://localhost:3003/api
 
 ### Authentication Endpoints
 
 #### Register User
+
 POST /api/auth/register
 Content-Type: application/json
 
@@ -173,8 +179,8 @@ Content-Type: application/json
 "role": "agent"
 }
 
-
 #### Login
+
 POST /api/auth/login
 Content-Type: application/json
 
@@ -193,9 +199,11 @@ Content-Type: application/json
 "role": "agent"
 }
 }
+
 ### Lead Management
 
 #### Create Lead
+
 POST /api/leads
 Authorization: Bearer {accessToken}
 Content-Type: application/json
@@ -207,10 +215,14 @@ Content-Type: application/json
 "status": "new",
 "source": "website"
 }
+
 #### Get All Leads
+
 GET /api/leads?status=new&source=website
 Authorization: Bearer {accessToken}
+
 #### Update Lead
+
 PUT /api/leads/:id
 Authorization: Bearer {accessToken}
 Content-Type: application/json
@@ -218,12 +230,16 @@ Content-Type: application/json
 {
 "status": "contacted"
 }
+
 #### Delete Lead
+
 DELETE /api/leads/:id
 Authorization: Bearer {accessToken}
+
 ### Call Task Management
 
 #### Create Call Task
+
 POST /api/call-tasks
 Authorization: Bearer {accessToken}
 Content-Type: application/json
@@ -234,7 +250,9 @@ Content-Type: application/json
 "scheduled_at": "2025-11-30T10:00:00Z",
 "idempotency_key": "unique-task-123"
 }
+
 #### Complete Call Task
+
 PUT /api/call-tasks/:id/complete
 Authorization: Bearer {accessToken}
 Content-Type: application/json
@@ -244,31 +262,43 @@ Content-Type: application/json
 "outcome": "follow_up_needed",
 "duration_minutes": 15
 }
+
 ### CSV Upload
 
 #### Upload CSV File
+
 POST /api/csv/upload
 Authorization: Bearer {accessToken}
 Content-Type: multipart/form-data
 
 file: [CSV file]
+
 #### Get CSV Processing Logs
+
 GET /api/csv/logs
 Authorization: Bearer {accessToken}
+
 ### Reports & Analytics
 
 #### Daily Summary
+
 GET /api/reports/daily-summary?date=2025-11-29
 Authorization: Bearer {accessToken}
+
 #### Agent Performance
+
 GET /api/reports/agent-performance?start_date=2025-11-01&end_date=2025-11-29
 Authorization: Bearer {accessToken}
+
 #### Insights
+
 GET /api/reports/insights
 Authorization: Bearer {accessToken}
+
 ### S3 Image Upload
 
 #### Get Pre-signed URL
+
 POST /api/leads/upload-url
 Authorization: Bearer {accessToken}
 Content-Type: application/json
@@ -289,11 +319,13 @@ PUT {uploadUrl}
 Content-Type: image/jpeg
 
 [Binary image data]
+
 ## 🔄 CI/CD Pipeline
 
 ### GitHub Actions Workflow
 
 Pipeline stages:
+
 1. **Lint** - ESLint code quality check
 2. **Test** - Run unit and integration tests
 3. **Build** - Compile TypeScript to JavaScript
@@ -308,15 +340,21 @@ Pipeline stages:
 ## 🐳 Docker Deployment
 
 ### Build Docker Image
+
 docker build -t unite-backend:latest .
+
 ### Run Container
+
 docker run -p 3003:3003 --env-file .env unite-backend:latest
+
 ### Docker Compose Production
+
 docker-compose -f docker-compose.prod.yml up -d
 
 ## 📊 Load Testing
 
 ### Using k6
+
 k6 run load-tests/leads.js
 
 Results are saved in `load-tests/results.txt`
@@ -347,6 +385,7 @@ This project is part of Unite Backend Developer Assignment.
 ## 👤 Author
 
 **Tushar Pethkar**
+
 - GitHub: [@Pethkar-Tushar-Narendra](https://github.com/Pethkar-Tushar-Narendra)
 - Email: pethkartusharnarendra@gmail.com
 
